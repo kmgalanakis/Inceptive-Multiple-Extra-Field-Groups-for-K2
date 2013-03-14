@@ -1,0 +1,34 @@
+#tabIncptvEXFG,#k2TabIncptvEXFG{
+	visibility:hidden;
+}
+
+.tabIncptvMEFG, .k2tabIncptvMEFG {
+	visibility:hidden;
+}
+
+ul.simpleTabsNavigation li#tabIncptvEXFG a {
+    background-image: url(../media/incptv_favicon.png);
+}
+
+ul.simpleTabsNavigation li.tabIncptvMEFG a {
+    background-image: url(../media/multiple_extra_field_groups.png);
+}
+
+ul.simpleTabsNavigation li.tabIncptvMEFG a {
+    background-image: url(../media/multiple_extra_field_groups.png);
+}
+
+/*ul.simpleTabsNavigation { overflow: auto; height: 38px; padding: 6px 0 1px 0; border: #c0c0c0 1px solid; border-bottom: none; margin-bottom: -3px;}*/
+
+/*ul.simpleTabsNavigation li { display: inline-block; }
+
+div.simpleTabsContent {border:none;} */
+/*
+ul.simpleTabsNavigation { float:left; width: 150px; margin: 0; }
+
+ul.simpleTabsNavigation li { height:35px; float: right; }
+
+div.simpleTabsContent { float:left; margin-top: -10px;}
+
+ul.simpleTabsNavigation li.ui-tabs-selected a { border-right: 1px solid #fff; }
+*/
