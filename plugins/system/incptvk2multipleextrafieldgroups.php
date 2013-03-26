@@ -59,6 +59,7 @@ class plgSystemIncptvk2multipleextrafieldgroups extends JPlugin
 				RIGHT JOIN #__k2_extra_fields_groups as efg ON efg.id = ef.`group`
 				WHERE `group` IN ({$extraFieldGroupIDs})
 				AND published=1
+				AND mefg.catID={$item->catid}
 				AND (ef.id IN ({$condition}) OR `type` = \'header\')
 				ORDER BY `group` ASC, ordering ASC"';
 		$newClass = substr_replace($newClass, $newQueryStart, $pos1, $pos3-$pos1);
