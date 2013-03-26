@@ -95,7 +95,7 @@ class plgSystemIncptvk2multipleextrafieldgroups extends JPlugin
 	    }
 	}
 	else {
-	    if(JRequest::getCMD('option') == 'com_k2' && JRequest::getCMD('view')  == 'item' && JRequest::getCMD('task')  != 'edit')
+	    if(JRequest::getCMD('option') == 'com_k2' && JRequest::getCMD('view')  == 'item' && JRequest::getCMD('task')  != 'edit' && JRequest::getCMD('task')  != 'save')
 	    {
 		JLoader::import( 'item', JPATH_PLUGINS . DS . 'k2' . DS . 'incptvk2multipleextrafieldgroups' . DS . 'models' );
 	    }	    
