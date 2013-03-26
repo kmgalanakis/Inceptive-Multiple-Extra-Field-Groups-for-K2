@@ -37,8 +37,14 @@ window.addEvent('domready', function () {
 });
 
 var $incptvK2 = jQuery.noConflict();
+var $container = 0;
 
 $incptvK2(document).ready(function(){
+    if($incptvK2("div#k2AdminContainer").length > 0)
+	$container = $incptvK2("div#k2AdminContainer");
+    else if($incptvK2("div#k2FrontendContainer").length > 0)
+	$container = $incptvK2("div#k2FrontendContainer");
+    
     var $selectedValue = $incptvK2('#extraFieldsGroup').find(":selected").text();
     $incptvK2('#extraFieldsGroup').change(function() {
 	var $newSelectedValue = $incptvK2('#extraFieldsGroup').find(":selected").text();
@@ -50,14 +56,17 @@ $incptvK2(document).ready(function(){
 	$selectedValue = $newSelectedValue;	
     });
 
-    $incptvK2("div#k2Tabs").css( "width", ($incptvK2("div#k2AdminContainer").width() - $incptvK2("#adminFormK2Sidebar").width() - 14));
+    if($incptvK2("#adminFormK2Sidebar").is(":visible"))
+	$incptvK2("div#k2Tabs").css( "width", ($container.width() - $incptvK2("#adminFormK2Sidebar").width() - 14));
+    else
+	$incptvK2("div#k2Tabs").css( "width", ($container.width() - 14));
 
     $incptvK2('#k2ToggleSidebar').click(function(event) {
 	    event.preventDefault();
 	    if($incptvK2("#adminFormK2Sidebar").is(":visible"))
-		$incptvK2("div#k2Tabs").css( "width", ($incptvK2("div#k2AdminContainer").width() - $incptvK2("#adminFormK2Sidebar").width() - 14));
+		$incptvK2("div#k2Tabs").css( "width", ($container.width() - $incptvK2("#adminFormK2Sidebar").width() - 14));
 	    else
-		$incptvK2("div#k2Tabs").css( "width", ($incptvK2("div#k2AdminContainer").width() - 14));
+		$incptvK2("div#k2Tabs").css( "width", ($container.width() - 14));
     });
 });
 
@@ -65,9 +74,9 @@ $incptvK2(window).load(function(){clickRightTab(); fixTabsRow(); });
 
 $incptvK2(window).resize(function(){
     if($incptvK2("#adminFormK2Sidebar").is(":visible"))
-	$incptvK2("div#k2Tabs").css( "width", ($incptvK2("div#k2AdminContainer").width() - $incptvK2("#adminFormK2Sidebar").width() - 14));
+	$incptvK2("div#k2Tabs").css( "width", ($container.width() - $incptvK2("#adminFormK2Sidebar").width() - 14));
     else
-	$incptvK2("div#k2Tabs").css( "width", ($incptvK2("div#k2AdminContainer").width() - 14));
+	$incptvK2("div#k2Tabs").css( "width", ($container.width() - 14));
     fixTabsRow();
 });
 

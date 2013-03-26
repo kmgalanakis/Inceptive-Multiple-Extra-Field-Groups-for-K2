@@ -19,10 +19,6 @@ class plgSystemIncptvk2multipleextrafieldgroups extends JPlugin
     public function onAfterRoute()
     {
 	$mainframe = JFactory::getApplication();
-	if(JRequest::getCMD('option') == 'com_k2' && JRequest::getCMD('view')  == 'item' && !$mainframe->isAdmin())
-	{
-	    JLoader::import( 'item', JPATH_PLUGINS . DS . 'k2' . DS . 'incptvk2multipleextrafieldgroups' . DS . 'models' );
-	}
 	
 	if ($mainframe->isAdmin())
 	{
@@ -58,7 +54,7 @@ class plgSystemIncptvk2multipleextrafieldgroups extends JPlugin
 		
 		$pos1 = strpos($newClass, 'SELECT * FROM #__k2_extra_fields', $getItemExtraFieldsPosition);
 		$pos3 = strpos($newClass, ';', $pos1);
-		$newQueryStart = 'SELECT ef.*, mefg.catID, mefg.exfgID, efg.name FROM #__k2_extra_fields ef 
+		$newQueryStart = 'SELECT ef.*, mefg.catID, mefg.exfgID, efg.name as group_name FROM #__k2_extra_fields ef 
 				RIGHT JOIN #__k2_multiple_extra_field_groups as mefg on mefg.exfgID = ef.`group`
 				RIGHT JOIN #__k2_extra_fields_groups as efg ON efg.id = ef.`group`
 				WHERE `group` IN ({$extraFieldGroupIDs})
@@ -96,6 +92,12 @@ class plgSystemIncptvk2multipleextrafieldgroups extends JPlugin
 		}
 		
 	    }
+	}
+	else {
+	    if(JRequest::getCMD('option') == 'com_k2' && JRequest::getCMD('view')  == 'item' && JRequest::getCMD('task')  != 'edit')
+	    {
+		JLoader::import( 'item', JPATH_PLUGINS . DS . 'k2' . DS . 'incptvk2multipleextrafieldgroups' . DS . 'models' );
+	    }	    
 	}
      }
 }
