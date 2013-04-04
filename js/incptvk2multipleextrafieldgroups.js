@@ -68,17 +68,52 @@ $incptvK2(document).ready(function(){
 	    else
 		$incptvK2("div#k2Tabs").css( "width", ($container.width() - 14));
     });
+    
+    $incptvK2('#catid').change(function() {
+	var selectedValue = $incptvK2(this).val();
+	var tabs = $incptvK2('#k2Tabs').tabs();
+	var url = K2BasePath + '../plugins/k2/incptvk2multipleextrafieldgroups/helpers/incptvk2mulitpleextrafieldgroupshelper.php?cid=' + selectedValue + '&id=' + $incptvK2('input[name=id]').val();
+	$incptvK2('#mefgTabs').remove();
+	$incptvK2.ajax({
+		url : url,
+		type : 'get',
+		success : function(response) {
+		    $incptvK2('.tabIncptvMEFG').remove();
+		    $incptvK2('.k2TabIncptvMEFG').remove();
+		    fixTabsContainer();
+		    fixTabsRow();
+		    $incptvK2('#k2AdminContainer').prepend(response);
+		    var extrafieldgroupTabs = $incptvK2('#mefgTabs li');
+		    $incptvK2.each(extrafieldgroupTabs, function() {
+			var k2TabIncptvMEFG = $incptvK2('#k2' + this.id.charAt(0).toUpperCase() + this.id.slice(1));		        
+			tabs.find(".ui-tabs-nav:first").append(this);
+			tabs.append(k2TabIncptvMEFG);
+			k2TabIncptvMEFG.addClass('simpleTabsContent');
+			var selected = tabs.tabs('option', 'selected');
+			tabs.tabs("destroy");
+			tabs.tabs();
+			$incptvK2('#k2Tabs').tabs('select', selected);
+			fixTabsContainer();
+			fixTabsRow();
+		    });
+		}
+	    });
+	});
 });
 
 $incptvK2(window).load(function(){clickRightTab(); fixTabsRow(); });
 
 $incptvK2(window).resize(function(){
+    fixTabsContainer();
+    fixTabsRow();
+});
+
+function fixTabsContainer() {
     if($incptvK2("#adminFormK2Sidebar").is(":visible"))
 	$incptvK2("div#k2Tabs").css( "width", ($container.width() - $incptvK2("#adminFormK2Sidebar").width() - 14));
     else
 	$incptvK2("div#k2Tabs").css( "width", ($container.width() - 14));
-    fixTabsRow();
-});
+}
 
 function fixTabsRow() {
     var $totalWidth = 0;
@@ -92,20 +127,20 @@ function fixTabsRow() {
 }
 
 function clickRightTab() {
-    $incptvK2('#tabExtraFields').hide();
-    $incptvK2('#k2Tab5').hide();
-    if(incptvK2('#tabAttachments').is(":visible") 
-	    && incptvK2('#tabContent').is(":hidden")  
-	    && incptvK2('#tabImage').is(":hidden") 
-	    && incptvK2('#tabImageGallery').is(":hidden") 
-	    && incptvK2('#tabVideo').is(":hidden") 
-	    && incptvK2('#tabVideo').is(":hidden"))
-	incptvK2('#tabAttachments a').click();
-    else if (incptvK2('#tabPlugins').is(":visible")
-		&& incptvK2('#tabContent').is(":hidden")  
-		&& incptvK2('#tabImage').is(":hidden") 
-		&& incptvK2('#tabImageGallery').is(":hidden") 
-		&& incptvK2('#tabVideo').is(":hidden") 
-		&& incptvK2('#tabVideo').is(":hidden") )
-	incptvK2('#tabPlugins a').click();
+    $incptvK2('#tabExtraFields').remove();
+    $incptvK2('#k2Tab5').remove();
+    if($incptvK2('#tabAttachments').is(":visible") 
+	    && $incptvK2('#tabContent').is(":hidden")  
+	    && $incptvK2('#tabImage').is(":hidden") 
+	    && $incptvK2('#tabImageGallery').is(":hidden") 
+	    && $incptvK2('#tabVideo').is(":hidden") 
+	    && $incptvK2('#tabVideo').is(":hidden"))
+	$incptvK2('#tabAttachments a').click();
+    else if ($incptvK2('#tabPlugins').is(":visible")
+		&& $incptvK2('#tabContent').is(":hidden")  
+		&& $incptvK2('#tabImage').is(":hidden") 
+		&& $incptvK2('#tabImageGallery').is(":hidden") 
+		&& $incptvK2('#tabVideo').is(":hidden") 
+		&& $incptvK2('#tabVideo').is(":hidden") )
+	$incptvK2('#tabPlugins a').click();
 }
