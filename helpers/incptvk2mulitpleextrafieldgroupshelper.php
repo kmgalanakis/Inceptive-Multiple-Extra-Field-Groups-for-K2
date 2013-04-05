@@ -52,6 +52,8 @@
     JLoader::register('K2Model', JPATH_COMPONENT_ADMINISTRATOR.DS.'models'.DS.'model.php');
     JLoader::register('K2Table', JPATH_COMPONENT_ADMINISTRATOR.DS.'tables'.DS.'table.php');
     require_once (JPATH_COMPONENT_ADMINISTRATOR.DS.'models'.DS.'extrafield.php');
+	$language = JFactory::getLanguage();
+	$language->load('com_k2', JPATH_ADMINISTRATOR);
     $extraFieldModel = K2Model::getInstance('ExtraField', 'K2Model');
     echo '<div id="mefgTabs">';
     foreach ($groups as $group) {
