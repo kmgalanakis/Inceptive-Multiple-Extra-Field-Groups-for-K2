@@ -116,7 +116,7 @@ class plgK2Incptvk2multipleextrafieldgroups extends K2Plugin
 		$extraFields = $extraFieldModel->getExtraFieldsByGroup($group->exfgID);
 		for ($i = 0; $i < sizeof($extraFields); $i++)
 		{
-		    $extraFields[$i]->element = str_replace('K2ExtraField_', 'K2ExtraField_MEFG_', $extraFieldModel->renderExtraField($extraFields[$i], $item->id));
+		    $extraFields[$i]->element = $extraFieldModel->renderExtraField($extraFields[$i], $item->id);
 		}
 		$tabIncptvMEFG	=   '<li id="tabIncptvMEFG_'.$group->exfgID.'" class="tabIncptvMEFG">
 					<a href="#k2TabIncptvMEFG_'.$group->exfgID.'">'.$group->name.'</a>

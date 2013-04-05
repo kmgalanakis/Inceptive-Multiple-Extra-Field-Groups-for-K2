@@ -40,6 +40,8 @@ var $incptvK2 = jQuery.noConflict();
 var $container = 0;
 
 $incptvK2(document).ready(function(){
+	$incptvK2('#tabExtraFields').remove();
+    $incptvK2('#k2Tab5').remove();
     if($incptvK2("div#k2AdminContainer").length > 0)
 	$container = $incptvK2("div#k2AdminContainer");
     else if($incptvK2("div#k2FrontendContainer").length > 0)
@@ -92,6 +94,9 @@ $incptvK2(document).ready(function(){
 			var selected = tabs.tabs('option', 'selected');
 			tabs.tabs("destroy");
 			tabs.tabs();
+			if ($incptvK2.fn.chosen) {
+			    $incptvK2('select').chosen({ disable_search_threshold : 10, allow_single_deselect : true });
+			}
 			$incptvK2('#k2Tabs').tabs('select', selected);
 			fixTabsContainer();
 			fixTabsRow();
@@ -126,9 +131,7 @@ function fixTabsRow() {
     }
 }
 
-function clickRightTab() {
-    $incptvK2('#tabExtraFields').remove();
-    $incptvK2('#k2Tab5').remove();
+function clickRightTab() {   
     if($incptvK2('#tabAttachments').is(":visible") 
 	    && $incptvK2('#tabContent').is(":hidden")  
 	    && $incptvK2('#tabImage').is(":hidden") 
