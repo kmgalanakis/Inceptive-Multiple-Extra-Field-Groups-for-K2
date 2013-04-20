@@ -92,9 +92,9 @@ class plgK2Incptvk2multipleextrafieldgroups extends K2Plugin
 	}
 	
 	if ($tab == 'other' && $type == 'item') {
-	    $mainframe 		= &JFactory::getApplication();
-	    $db 			= &JFactory::getDBO();
-	    $document 		= &JFactory::getDocument();
+	    $mainframe 		= JFactory::getApplication();
+	    $db 			= JFactory::getDBO();
+	    $document 		= JFactory::getDocument();
 	    $path 		= str_replace("administrator/", "",JURI::base());
 	    $plugin_folder 	= basename(dirname(__FILE__));
 	    
