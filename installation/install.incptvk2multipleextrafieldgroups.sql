@@ -1,6 +1,6 @@
 --
 -- version 1.0.0
--- package Inceptive Mutliple Extra Field Groups for K2
+-- package Inceptive Multiple Extra Field Groups for K2
 -- author Inceptive Design Labs <info@inceptive.gr>
 -- link http://www.inceptive.gr
 -- copyright Copyright (c) 2012 inceptive.gr
