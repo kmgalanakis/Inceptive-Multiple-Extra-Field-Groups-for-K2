@@ -27,8 +27,8 @@
 
     $mainframe = JFactory::getApplication('site');
     
-    $db 			= &JFactory::getDBO();
-    $document 		= &JFactory::getDocument();
+    $db 			= JFactory::getDBO();
+    $document 		= JFactory::getDocument();
     $path 		= str_replace("administrator/", "",JURI::base());
     $plugin_folder 	= basename(dirname(__FILE__));
     
@@ -51,7 +51,7 @@
     
     JLoader::register('K2Model', JPATH_COMPONENT_ADMINISTRATOR.DS.'models'.DS.'model.php');
     JLoader::register('K2Table', JPATH_COMPONENT_ADMINISTRATOR.DS.'tables'.DS.'table.php');
-    require_once (JPATH_COMPONENT_ADMINISTRATOR.DS.'models'.DS.'extrafield.php');
+    @require_once (JPATH_COMPONENT_ADMINISTRATOR.DS.'models'.DS.'extrafield.php');
 	$language = JFactory::getLanguage();
 	$language->load('com_k2', JPATH_ADMINISTRATOR);
     $extraFieldModel = K2Model::getInstance('ExtraField', 'K2Model');
@@ -61,7 +61,7 @@
 	
 	for ($i = 0; $i < sizeof($extraFields); $i++)
 	{
-	    $extraFields[$i]->element = $extraFieldModel->renderExtraField($extraFields[$i], $itemid);
+	    $extraFields[$i]->element = @$extraFieldModel->renderExtraField($extraFields[$i], $itemid);
 	}
 	$tabIncptvMEFG	=   '<li id="tabIncptvMEFG_'.$group->exfgID.'" class="tabIncptvMEFG">
 				<a href="#k2TabIncptvMEFG_'.$group->exfgID.'">'.$group->name.'</a>

@@ -101,9 +101,65 @@ $incptvK2(document).ready(function(){
 			fixTabsContainer();
 			fixTabsRow();
 		    });
+                    
+                    $incptvK2('.extraFieldsContainerMEFG').on('click', '.k2ExtraFieldImageButton', function(event) {
+                        event.preventDefault();
+                        //var href = $incptvK2(this).attr('href');
+                        var href = 'index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=K2ExtraField_'+$incptvK2(this).attr('href').substring($incptvK2(this).attr('href').indexOf('K2ExtraField_')+13);
+                        $incptvK2(this).attr('href', href);
+                        SqueezeBox.initialize();
+                        SqueezeBox.fromElement(this, {
+                            handler : 'iframe',
+                            url : K2BasePath + href,
+                            size : {
+                                x : 800,
+                                y : 434
+                            }
+                        }); 
+                    });
+
+                    $incptvK2('img.calendar').each(function() {
+                        inputFieldID = $incptvK2(this).prev().attr('id');
+                        imgFieldID = $incptvK2(this).attr('id');
+                        calendarSource = $incptvK2(this).attr('src').substring(0, $incptvK2(this).attr('src').indexOf('plugins/'));
+                        $incptvK2(this).attr('src', calendarSource+'administrator/templates/bluestork/images/system/calendar.png');
+                        Calendar.setup({
+                            inputField : inputFieldID,
+                            ifFormat : "%Y-%m-%d",
+                            button : imgFieldID,
+                            align : "Tl",
+                            singleClick : true
+                        });
+                    });
 		}
 	    });
 	});
+
+    $incptvK2('#extraFieldsContainer').on('click', '.k2ExtraFieldImageButton', function(event) {
+    	event.preventDefault();
+    	var href = $incptvK2(this).attr('href');
+    	SqueezeBox.initialize();
+        SqueezeBox.fromElement(this, {
+            handler : 'iframe',
+            url : K2BasePath + href,
+            size : {
+                x : 800,
+                y : 434
+            }
+        }); 
+    });
+    
+    $incptvK2('img.calendar').each(function() {
+        inputFieldID = $incptvK2(this).prev().attr('id');
+        imgFieldID = $incptvK2(this).attr('id');
+        Calendar.setup({
+            inputField : inputFieldID,
+            ifFormat : "%Y-%m-%d",
+            button : imgFieldID,
+            align : "Tl",
+            singleClick : true
+        });
+    });
 });
 
 $incptvK2(window).load(function(){clickRightTab(); fixTabsRow(); });

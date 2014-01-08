@@ -36,7 +36,7 @@ class plgK2Incptvk2multipleextrafieldgroups extends K2Plugin
     function onRenderAdminForm (&$item, $type, $tab='') {
 	if($tab == '' && $type == 'category')
 	{
-	    $mainframe 		= &JFactory::getApplication();
+	    $mainframe 		= JFactory::getApplication();
 	    
 	    $selectedExtraFieldGroups = array();
 	    
@@ -54,7 +54,7 @@ class plgK2Incptvk2multipleextrafieldgroups extends K2Plugin
 	    if(empty($selectedExtraFieldGroups))
 		array_push($selectedExtraFieldGroups, 0);
 
-	    $document 		= &JFactory::getDocument();
+	    $document 		= JFactory::getDocument();
 	    $path 		= str_replace("administrator/", "",JURI::base());
 	    $plugin_folder 	= basename(dirname(__FILE__));
 	    $document->addScript($path.'plugins/k2/'.$plugin_folder.'/js/incptvk2multipleextrafieldgroups.js');
