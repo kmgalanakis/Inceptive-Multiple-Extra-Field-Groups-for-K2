@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="2.5" type="plugin" group="system" method="upgrade">
     <name>Inceptive Multiple Extra Field Groups for K2 (system plugin)</name>
-    <author>Inceptive Design Labs</author>
-    <authorEmail>info@inceptive.gr</authorEmail>
-    <authorUrl>www.inceptive.gr</authorUrl>
-    <copyright>Copyright (c) 2006-2012 Inceptive GP. All rights reserved.</copyright>
-    <creationDate>March 14, 2013</creationDate>
-    <license>GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html</license>
+    <author>Extend by Inceptive Design Labs</author>
+    <authorEmail>inceptive@inceptive.gr</authorEmail>
+    <authorUrl>www.inceptive.gr</authorUrl><authorUrl>http://extend.inceptive.gr</authorUrl>
+    <copyright>Copyright (C) 2013 Inceptive Design Labs. All Rights Reserved</copyright>
+    <creationDate>May, 2013</creationDate>
+    <license>GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html</license>
     <version>1.2</version>
     <description>Inceptive Multiple Extra Field Groups for K2 (system plugin)</description>
     <files>
