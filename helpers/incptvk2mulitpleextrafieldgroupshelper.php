@@ -84,7 +84,7 @@
 	    endforeach;
 	    $exString .= '</table>';
 	else:
-	    $exString .='Lorem ispums';
+	    $exString .='No extra fields here!';
 	endif;
 	$exString .= '</div>';
 	$tabIncptvMEFG_content  = '<div id="k2TabIncptvMEFG_'.$group->exfgID.'" class="k2TabIncptvMEFG simpleTabsContent" >'.$exString.'</div>';
