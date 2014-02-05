@@ -94,10 +94,15 @@ class plgSystemIncptvk2multipleextrafieldgroups extends JPlugin
 	    }
 	}
 	else {
-	    if(JRequest::getCMD('option') == 'com_k2' && JRequest::getCMD('view')  == 'item' && JRequest::getCMD('task')  != 'edit' && JRequest::getCMD('task')  != 'save' && JRequest::getCMD('task')  != 'save')
+	    if(JRequest::getCMD('option') == 'com_k2' && JRequest::getCMD('view')  == 'item' && JRequest::getCMD('task')  != 'edit' && JRequest::getCMD('task')  != 'save' && JRequest::getCMD('task')  != 'add' && JRequest::getCMD('task')  != 'download')
 	    {
 		JLoader::import( 'item', JPATH_PLUGINS . DS . 'k2' . DS . 'incptvk2multipleextrafieldgroups' . DS . 'models' );
-	    }	    
+	    }	
+
+		if(JRequest::getCMD('option') == 'com_k2' && JRequest::getCMD('view')  == 'itemlist')
+		{
+				JLoader::import( 'item', JPATH_PLUGINS . DS . 'k2' . DS . 'incptvk2multipleextrafieldgroups' . DS . 'models' );
+		}
 	}
      }
 }
