@@ -41,8 +41,8 @@ class plgK2Incptvk2multipleextrafieldgroups extends K2Plugin
 	    
 	    if($item->id != 0)
 	    {
-		$db			    = &JFactory::getDBO();
-		$rows			    = &JTable::getInstance('IncptvK2MultipleExtraFieldGroups', 'Table');
+		$db			    = JFactory::getDBO();
+		$rows			    = JTable::getInstance('IncptvK2MultipleExtraFieldGroups', 'Table');
 		$retrievedExtraFieldGroups  = $rows->getSomeObjectsList('SELECT * FROM #__k2_multiple_extra_field_groups mefg WHERE mefg.catID = '.$item->id.' ORDER BY mefg.exfgid ASC');
 		foreach ($retrievedExtraFieldGroups as $retrievedExtraFieldGroup) { 
 		    if($retrievedExtraFieldGroup->exfgID != $item->extraFieldsGroup)
