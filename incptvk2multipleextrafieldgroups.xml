@@ -7,7 +7,7 @@
     <copyright>Copyright (C) 2013 Inceptive Design Labs. All Rights Reserved</copyright>
     <creationDate>May, 2013</creationDate>
     <license>GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html</license>
-    <version>1.2</version>
+    <version>1.2.1</version>
     <description></description>
 	<updateservers>
 	   <server type="extension" priority="1" name="Inceptive Multiple Extra Field Groups for K2 Updates">http://extend.inceptive.gr/update/updateMultipleExtraFieldGroupsForK2.xml</server>
