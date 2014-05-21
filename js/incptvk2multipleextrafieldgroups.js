@@ -161,12 +161,16 @@ $incptvK2(document).ready(function(){
     });
 });
 
-$incptvK2(window).load(function(){clickRightTab(); fixTabsRow(); });
+$incptvK2(window).load(function(){clickRightTab(); fixTabsRow(); moveToTop();});
 
 $incptvK2(window).resize(function(){
     fixTabsContainer();
     fixTabsRow();
 });
+
+function moveToTop() {
+	$incptvK2('html, body').scrollTop(0);
+}
 
 function fixTabsContainer() {
     if($incptvK2("#adminFormK2Sidebar").is(":visible"))
