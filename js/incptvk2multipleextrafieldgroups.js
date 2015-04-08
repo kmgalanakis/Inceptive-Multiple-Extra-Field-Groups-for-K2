@@ -83,7 +83,7 @@ $incptvK2(document).ready(function(){
 		    $incptvK2('.k2TabIncptvMEFG').remove();
 		    fixTabsContainer();
 		    fixTabsRow();
-		    $incptvK2('#k2AdminContainer').prepend(response);
+		    $container.prepend(response);
 		    var extrafieldgroupTabs = $incptvK2('#mefgTabs li');
 		    $incptvK2.each(extrafieldgroupTabs, function() {
 			var k2TabIncptvMEFG = $incptvK2('#k2' + this.id.charAt(0).toUpperCase() + this.id.slice(1));		        
