@@ -9,3 +9,8 @@ ul.simpleTabsNavigation li.tabIncptvMEFG a {
 ul.simpleTabsNavigation li.tabIncptvMEFG a {
     background-image: url(../media/multiple_extra_field_groups.png);
 }
+
+ul.k2TabsNavigation li.tabIncptvMEFG
+{
+    margin-left: 4px !important;
+}

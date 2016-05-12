@@ -5,12 +5,24 @@
  * @license		GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
  */
 
-window.addEvent('domready', function() {
+window.addEvent('domready', function () {
     if ($('tabIncptvEXFG') !== null) {
-        k2tabs_holder = $$('.simpleTabsNavigation');
         tabIncptvEXFG = $('tabIncptvEXFG');
         k2all_tabs = $('k2Tabs');
         k2tabIncptvEXFG = $('k2tabIncptvEXFG');
+
+        k2tabs_holder = $$('.simpleTabsNavigation');
+        if (typeof (k2tabs_holder[0]) === 'undefined') {
+            k2tabs_holder = $$('.k2TabsNavigation');
+            k2tabIncptvEXFG.removeChild(k2tabIncptvEXFG.getElementsByClassName('admintable')[0]);
+            var node = document.getElementById('tabIncptvEXFGold');
+            node.parentNode.removeChild(node);
+        }
+        else {
+            k2tabIncptvEXFG.removeChild(k2tabIncptvEXFG.getElementsByClassName('itemAdditionalField')[0]);
+            var node = document.getElementById('tabIncptvEXFGge27');
+            node.parentNode.removeChild(node);
+        }
 
         k2tabs_holder[0].grab(tabIncptvEXFG, 'bottom');
         k2all_tabs.grab(k2tabIncptvEXFG, 'bottom');
@@ -20,12 +32,26 @@ window.addEvent('domready', function() {
 
     var incptvK2 = jQuery.noConflict();
     extrafieldgroupTabs = incptvK2('.tabIncptvMEFG')
-    incptvK2.each(extrafieldgroupTabs, function() {
+    incptvK2.each(extrafieldgroupTabs, function () {
         k2tabs_holder_MEFG = $$('.simpleTabsNavigation');
         tabIncptvMEFG = $(this.id);
         k2all_tabs_MEFG = $('k2Tabs');
         k2TabIncptvMEFG = $('k2' + this.id.charAt(0).toUpperCase() + this.id.slice(1));
 
+        if (typeof (k2tabs_holder_MEFG[0]) === 'undefined') {
+            k2tabs_holder_MEFG = $$('.k2TabsNavigation');
+            var admintableNode = k2TabIncptvMEFG.getElementsByClassName('admintable')[0];
+            admintableNode.parentNode.removeChild(admintableNode);
+            var node = document.getElementById('tabIncptvMEXFGold');
+            node.parentNode.removeChild(node);
+        }
+        else {
+            var itemAdditionalFieldNode = k2TabIncptvMEFG.getElementsByClassName('itemAdditionalField')[0];
+            itemAdditionalFieldNode.parentNode.removeChild(itemAdditionalFieldNode);
+            var node = document.getElementById('tabIncptvMEXFGge27');
+            node.parentNode.removeChild(node);
+        }
+        
         k2tabs_holder_MEFG[0].grab(tabIncptvMEFG, 'bottom');
         k2all_tabs_MEFG.grab(k2TabIncptvMEFG, 'bottom');
         tabIncptvMEFG.setStyle('visibility', 'visible');
@@ -37,8 +63,9 @@ window.addEvent('domready', function() {
 var $incptvK2 = jQuery.noConflict();
 var $container = 0;
 
-$incptvK2(document).ready(function() {
+$incptvK2(document).ready(function () {
     $incptvK2('#tabExtraFields').remove();
+    $incptvK2('#k2TabExtraFields').remove();
     $incptvK2('#k2Tab5').remove();
     if ($incptvK2("div#k2AdminContainer").length > 0)
         $container = $incptvK2("div#k2AdminContainer");
@@ -46,14 +73,23 @@ $incptvK2(document).ready(function() {
         $container = $incptvK2("div#k2FrontendContainer");
 
     var $selectedValue = $incptvK2('#extraFieldsGroup').find(":selected").text();
-    $incptvK2('#extraFieldsGroup').change(function() {
+    $incptvK2('#extraFieldsGroup').change(function () {
         var $newSelectedValue = $incptvK2('#extraFieldsGroup').find(":selected").text();
-        var $newSelectedOption = $incptvK2('#pluginsincptvk2multipleextrafieldgroups option:contains("' + $newSelectedValue + '")');
+        var $newSelectedOption = $incptvK2('#pluginsincptvk2multipleextrafieldgroups option').filter(function () {
+            if(this.innerHTML == $newSelectedValue)
+                return this;
+        });
         $newSelectedOption.attr('disabled', 'disabled');
         $newSelectedOption.removeAttr('selected');
-        var $selectedOption = $incptvK2('#pluginsincptvk2multipleextrafieldgroups option:contains("' + $selectedValue + '")');
+        var $selectedOption = $incptvK2('#pluginsincptvk2multipleextrafieldgroups option').filter(function () {
+            if(this.innerHTML == $selectedValue)
+                return this;
+        });
         $selectedOption.removeAttr('disabled');
         $selectedValue = $newSelectedValue;
+        
+        $incptvK2('#pluginsincptvk2multipleextrafieldgroups').chosen('destroy');
+        $incptvK2('#pluginsincptvk2multipleextrafieldgroups').chosen();
     });
 
     if ($incptvK2("#adminFormK2Sidebar").is(":visible"))
@@ -61,7 +97,7 @@ $incptvK2(document).ready(function() {
     else
         $incptvK2("div#k2Tabs").css("width", ($container.width() - 14));
 
-    $incptvK2('#k2ToggleSidebar').click(function(event) {
+    $incptvK2('#k2ToggleSidebar').click(function (event) {
         event.preventDefault();
         if ($incptvK2("#adminFormK2Sidebar").is(":visible"))
             $incptvK2("div#k2Tabs").css("width", ($container.width() - $incptvK2("#adminFormK2Sidebar").width() - 14));
@@ -69,7 +105,7 @@ $incptvK2(document).ready(function() {
             $incptvK2("div#k2Tabs").css("width", ($container.width() - 14));
     });
 
-    $incptvK2('#catid').change(function() {
+    $incptvK2('#catid').change(function () {
         var selectedValue = $incptvK2(this).val();
         var tabs = $incptvK2('#k2Tabs').tabs();
         var url = K2BasePath + '../plugins/k2/incptvk2multipleextrafieldgroups/helpers/incptvk2mulitpleextrafieldgroupshelper.php?cid=' + selectedValue + '&id=' + $incptvK2('input[name=id]').val();
@@ -77,14 +113,14 @@ $incptvK2(document).ready(function() {
         $incptvK2.ajax({
             url: url,
             type: 'get',
-            success: function(response) {
+            success: function (response) {
                 $incptvK2('.tabIncptvMEFG').remove();
                 $incptvK2('.k2TabIncptvMEFG').remove();
                 fixTabsContainer();
                 fixTabsRow();
                 $container.prepend(response);
                 var extrafieldgroupTabs = $incptvK2('#mefgTabs li');
-                $incptvK2.each(extrafieldgroupTabs, function() {
+                $incptvK2.each(extrafieldgroupTabs, function () {
                     var k2TabIncptvMEFG = $incptvK2('#k2' + this.id.charAt(0).toUpperCase() + this.id.slice(1));
                     tabs.find(".ui-tabs-nav:first").append(this);
                     tabs.append(k2TabIncptvMEFG);
@@ -100,7 +136,7 @@ $incptvK2(document).ready(function() {
                     fixTabsRow();
                 });
 
-                $incptvK2('.extraFieldsContainerMEFG').on('click', '.k2ExtraFieldImageButton', function(event) {
+                $incptvK2('.extraFieldsContainerMEFG').on('click', '.k2ExtraFieldImageButton', function (event) {
                     event.preventDefault();
                     //var href = $incptvK2(this).attr('href');
                     var href = 'index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=K2ExtraField_' + $incptvK2(this).attr('href').substring($incptvK2(this).attr('href').indexOf('K2ExtraField_') + 13);
@@ -116,7 +152,7 @@ $incptvK2(document).ready(function() {
                     });
                 });
 
-                $incptvK2('img.calendar').each(function() {
+                $incptvK2('img.calendar').each(function () {
                     inputFieldID = $incptvK2(this).prev().attr('id');
                     imgFieldID = $incptvK2(this).attr('id');
                     calendarSource = $incptvK2(this).attr('src').substring(0, $incptvK2(this).attr('src').indexOf('plugins/'));
@@ -130,7 +166,7 @@ $incptvK2(document).ready(function() {
                     });
                 });
 
-                $incptvK2('.k2ExtraFieldEditor').each(function() {
+                $incptvK2('.k2ExtraFieldEditor').each(function () {
                     var id = $incptvK2(this).attr('id');
                     if (typeof tinymce != 'undefined') {
                         if (tinyMCE.get(id)) {
@@ -155,7 +191,7 @@ $incptvK2(document).ready(function() {
         });
     });
 
-    $incptvK2('#extraFieldsContainer').on('click', '.k2ExtraFieldImageButton', function(event) {
+    $incptvK2('#extraFieldsContainer').on('click', '.k2ExtraFieldImageButton', function (event) {
         event.preventDefault();
         var href = $incptvK2(this).attr('href');
         SqueezeBox.initialize();
@@ -169,7 +205,7 @@ $incptvK2(document).ready(function() {
         });
     });
 
-    $incptvK2('img.calendar').each(function() {
+    $incptvK2('img.calendar').each(function () {
         inputFieldID = $incptvK2(this).prev().attr('id');
         imgFieldID = $incptvK2(this).attr('id');
         Calendar.setup({
@@ -182,33 +218,40 @@ $incptvK2(document).ready(function() {
     });
 });
 
-$incptvK2(window).load(function() { clickRightTab(); fixTabsRow(); moveToTop(); });
+$incptvK2(window).load(function () { clickRightTab(); fixTabsRow(); moveToTop(); });
 
-$incptvK2(window).resize(function() {
+$incptvK2(window).resize(function () {
     fixTabsContainer();
     fixTabsRow();
 });
 
 function moveToTop() {
-    $incptvK2('html, body').scrollTop(0);
+    if (typeof (K2_INSTALLED_VERSION) === 'undefined') {
+        $incptvK2('html, body').scrollTop(0);
+    }
 }
 
 function fixTabsContainer() {
-    if ($incptvK2("#adminFormK2Sidebar").is(":visible"))
-        $incptvK2("div#k2Tabs").css("width", ($container.width() - $incptvK2("#adminFormK2Sidebar").width() - 14));
-    else
-        $incptvK2("div#k2Tabs").css("width", ($container.width() - 14));
+    if (typeof (K2_INSTALLED_VERSION) === 'undefined') {
+        if ($incptvK2("#adminFormK2Sidebar").is(":visible"))
+            $incptvK2("div#k2Tabs").css("width", ($container.width() - $incptvK2("#adminFormK2Sidebar").width() - 14));
+        else
+            $incptvK2("div#k2Tabs").css("width", ($container.width() - 14));
+    }
 }
 
 function fixTabsRow() {
-    var $totalWidth = 0;
-    $incptvK2('#k2Tabs ul').first().children('[style!="display: none;"]').each(function() { $totalWidth += $incptvK2(this).width(); });
-    if ($totalWidth > $incptvK2("div#k2Tabs").width()) {
-        $incptvK2('#k2Tabs ul').first().css({ 'overflow': 'auto', 'height': '38px', 'padding': '6px 0 1px 0', 'border': '#c0c0c0 1px solid', 'border-bottom': 'none', 'margin-bottom': '-3px' });
+    if (typeof (K2_INSTALLED_VERSION) === 'undefined') {
+        var $totalWidth = 0;
+        $incptvK2('#k2Tabs ul').first().children('[style!="display: none;"]').each(function () { $totalWidth += $incptvK2(this).width(); });
+        if ($totalWidth > $incptvK2("div#k2Tabs").width()) {
+            $incptvK2('#k2Tabs ul').first().css({ 'overflow': 'auto', 'height': '38px', 'padding': '6px 0 1px 0', 'border': '#c0c0c0 1px solid', 'border-bottom': 'none', 'margin-bottom': '-3px' });
+        }
+        else {
+            $incptvK2('#k2Tabs ul').first().css({ 'overflow': 'visible', 'height': '17px', 'padding': '0 10px', 'border': 'none', 'margin': '0' });
+        }
     }
-    else {
-        $incptvK2('#k2Tabs ul').first().css({ 'overflow': 'visible', 'height': '17px', 'padding': '0 10px', 'border': 'none', 'margin': '0' });
-    }
+
 }
 
 function clickRightTab() {
