@@ -81,11 +81,22 @@ class plgK2Incptvk2multipleextrafieldgroups extends K2Plugin
 	    //$tabIncptvEXFG_innerHtml .= '<input type="hidden" name="plugins[incptvk2failsafe]" value="FailSafeValue">';
 	    $tabIncptvEXFG_innerHtml .= '</td></tr>';	    
 	    $tabIncptvEXFG_innerHtml .='</tbody></table>';
+		
+		$tabIncptvEXFG_innerHtmlK2ge27 = '<div class="itemAdditionalField">';
+		$tabIncptvEXFG_innerHtmlK2ge27 .= '<div class="k2FLeft k2Right itemAdditionalValue">';
+		$tabIncptvEXFG_innerHtmlK2ge27 .= '<label>'.JText::_('PLG_K2_MEFG_ADDITIONAL_EXTRA_FIELD_GROUPS_LABEL').'</label>';
+		$tabIncptvEXFG_innerHtmlK2ge27 .= '</div>';
+
+		$tabIncptvEXFG_innerHtmlK2ge27 .= '<div class="itemAdditionalData">';
+		$tabIncptvEXFG_innerHtmlK2ge27 .= JHTML::_('select.genericlist', $group, 'plugins[incptvk2multipleextrafieldgroups][]', 'style="width:100%;" multiple="multiple" size="10"', 'id', 'name', $selectedExtraFieldGroups);
+		$tabIncptvEXFG_innerHtmlK2ge27 .= '</div>';
+		$tabIncptvEXFG_innerHtmlK2ge27 .= '</div>';
 	    
 	    $tabIncptvEXFG	=   '<li id="tabIncptvEXFG">
-					<a href="#k2tabIncptvEXFG">'.JText::_('PLG_K2_MEFG_MULTIPLE_EXTRA_FIELD_GROUPS_LABEL').'</a>
+					<a href="#k2tabIncptvEXFG" id="tabIncptvEXFGold">'.JText::_('PLG_K2_MEFG_MULTIPLE_EXTRA_FIELD_GROUPS_LABEL').'</a>
+					<a href="#k2tabIncptvEXFG" id="tabIncptvEXFGge27"><i class="fa fa-clone" aria-hidden="true"></i> '.JText::_('PLG_K2_MEFG_MULTIPLE_EXTRA_FIELD_GROUPS_LABEL').'</a>
 				    </li>';
-	    $tabIncptvEXFG_content  = '<div id="k2tabIncptvEXFG" class="simpleTabsContent" >'.$tabIncptvEXFG_innerHtml.'</div>';
+	    $tabIncptvEXFG_content  = '<div id="k2tabIncptvEXFG" class="simpleTabsContent k2TabsContent k2TabsContentLower" >'.$tabIncptvEXFG_innerHtml.$tabIncptvEXFG_innerHtmlK2ge27.'</div>';
 	    
 	    echo $tabIncptvEXFG.$tabIncptvEXFG_content;
 	}
@@ -118,7 +129,8 @@ class plgK2Incptvk2multipleextrafieldgroups extends K2Plugin
 		    $extraFields[$i]->element = $extraFieldModel->renderExtraField($extraFields[$i], $item->id);
 		}
 		$tabIncptvMEFG	=   '<li id="tabIncptvMEFG_'.$group->exfgID.'" class="tabIncptvMEFG">
-					<a href="#k2TabIncptvMEFG_'.$group->exfgID.'">'.$group->name.'</a>
+					<a href="#k2TabIncptvMEFG_'.$group->exfgID.'" id="tabIncptvMEXFGold">'.$group->name.'</a>
+					<a href="#k2TabIncptvMEFG_'.$group->exfgID.'" id="tabIncptvMEXFGge27"><i class="fa fa-object-group" aria-hidden="true"></i> '.$group->name.'</a>
 				    </li>';
 		$exString = '<div id="extraFieldsContainer">';
 		if (count($extraFields)):
@@ -138,6 +150,26 @@ class plgK2Incptvk2multipleextrafieldgroups extends K2Plugin
 			$exString .= '</tr>';
 		    endforeach;
 		    $exString .= '</table>';
+			
+			$exString .= '<div class="itemAdditionalFields" id="extraFields">';
+		    foreach($extraFields as $extraField):
+
+			    if($extraField->type == 'header'):
+				$exString .= '<div class="itemAdditionalField">';
+				$exString .= '<div class="k2FLeft k2Right itemAdditionalValue"><h4 class="k2ExtraFieldHeader">'.$extraField->name.'</h4></div>';
+				$exString .= '</div>';
+			    else:
+				$exString .= '<div class="itemAdditionalField">';
+				$exString .= '<div class="k2FLeft k2Right itemAdditionalValue">';
+				$exString .= '<label for="K2ExtraField_'.$extraField->id.'">'.$extraField->name.'</label>';
+				$exString .= '</div>';
+				$exString .= '<div class="itemAdditionalData">';
+				$exString .= $extraField->element;
+				$exString .= '</div>';
+				$exString .= '</div>';
+			    endif;
+		    endforeach;
+		    $exString .= '</div>';
 		else:
 		    if (K2_JVERSION == '15'):
 			$exString .='<dl id="system-message">';
@@ -169,7 +201,7 @@ class plgK2Incptvk2multipleextrafieldgroups extends K2Plugin
 		    endif;
 		endif;
 		$exString .= '</div>';
-		$tabIncptvMEFG_content  = '<div id="k2TabIncptvMEFG_'.$group->exfgID.'" class="k2TabIncptvMEFG simpleTabsContent" >'.$exString.'</div>';
+		$tabIncptvMEFG_content  = '<div id="k2TabIncptvMEFG_'.$group->exfgID.'" class="k2TabIncptvMEFG simpleTabsContent k2TabsContent k2TabsContentLower" >'.$exString.'</div>';
 		echo $tabIncptvMEFG.$tabIncptvMEFG_content;
 	    }
 	}
