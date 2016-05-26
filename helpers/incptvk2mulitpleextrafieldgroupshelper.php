@@ -63,7 +63,8 @@
 	    $extraFields[$i]->element = @$extraFieldModel->renderExtraField($extraFields[$i], $itemid);
 	}
 	$tabIncptvMEFG	=   '<li id="tabIncptvMEFG_'.$group->exfgID.'" class="tabIncptvMEFG">
-				<a href="#k2TabIncptvMEFG_'.$group->exfgID.'">'.$group->name.'</a>
+				<a href="#k2TabIncptvMEFG_'.$group->exfgID.'" id="tabIncptvMEXFGold">'.$group->name.'</a>
+				<a href="#k2TabIncptvMEFG_'.$group->exfgID.'" id="tabIncptvMEXFGge27"><i class="fa fa-object-group" aria-hidden="true"></i> '.$group->name.'</a>
 			    </li>';
 	$exString = '<div id="extraFieldsContainer_'.$group->exfgID.'" class="extraFieldsContainerMEFG">';
 	if (count($extraFields)):
@@ -83,11 +84,30 @@
 		$exString .= '</tr>';
 	    endforeach;
 	    $exString .= '</table>';
+		
+		$exString .= '<div class="itemAdditionalFields" id="extraFields">';
+		foreach($extraFields as $extraField):
+
+			if($extraField->type == 'header'):
+			$exString .= '<div class="itemAdditionalField">';
+			$exString .= '<div class="k2FLeft k2Right itemAdditionalValue"><h4 class="k2ExtraFieldHeader">'.$extraField->name.'</h4></div>';
+			$exString .= '</div>';
+			else:
+			$exString .= '<div class="itemAdditionalField">';
+			$exString .= '<div class="k2FLeft k2Right itemAdditionalValue">';
+			$exString .= '<label for="K2ExtraField_'.$extraField->id.'">'.$extraField->name.'</label>';
+			$exString .= '</div>';
+			$exString .= '<div class="itemAdditionalData">';
+			$exString .= $extraField->element;
+			$exString .= '</div>';
+			$exString .= '</div>';
+			endif;
+		endforeach;
 	else:
 	    $exString .='No extra fields here!';
 	endif;
 	$exString .= '</div>';
-	$tabIncptvMEFG_content  = '<div id="k2TabIncptvMEFG_'.$group->exfgID.'" class="k2TabIncptvMEFG simpleTabsContent" >'.$exString.'</div>';
+	$tabIncptvMEFG_content  = '<div id="k2TabIncptvMEFG_'.$group->exfgID.'" class="k2TabIncptvMEFG simpleTabsContent k2TabsContent k2TabsContentLower" >'.$exString.'</div>';
 	echo $tabIncptvMEFG.$tabIncptvMEFG_content;
     }
     echo '</div>';
