@@ -1,4 +1,4 @@
-# Inceptive-Multiple-Extra-Field-Groups-for-K2
+# Inceptive Multiple Extra Field Groups for K2
 Inceptive Multiple Extra Field Groups for K2 is an easy way to assign multiple extra field groups to K2 categories without hacking the K2 core.
 
 ## Features
