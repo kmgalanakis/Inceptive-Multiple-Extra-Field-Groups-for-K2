@@ -10,7 +10,7 @@
     <version>1.3</version>
     <description></description>
 	<updateservers>
-	   <server type="extension" priority="1" name="Inceptive Multiple Extra Field Groups for K2 Updates">http://extend.inceptive.gr/update/updateMultipleExtraFieldGroupsForK2.xml</server>
+	   <server type="extension" priority="1" name="Inceptive Multiple Extra Field Groups for K2 Updates">https://raw.githubusercontent.com/kmgalanakis/JoomlaUpdateServer/master/update.xml</server>
 	</updateservers>
     <install>
 		<sql>
